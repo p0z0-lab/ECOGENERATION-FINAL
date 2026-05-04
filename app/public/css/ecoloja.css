@@ -343,3 +343,50 @@
     font-size: 0.8rem;
   }
 }
+
+/* ── DARK MODE ──────────────────────────────────────────── */
+[data-theme="dark"] .ecoloja-header h1 {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .ecoloja-subtitulo,
+[data-theme="dark"] .ecoloja-header p {
+  color: #cccccc;
+}
+
+[data-theme="dark"] .produto-card {
+  background: #2a2a2a;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .produto-card h3 {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .produto-card p {
+  color: #cccccc;
+}
+
+[data-theme="dark"] .produto-preco {
+  color: #7fcf80;
+}
+
+[data-theme="dark"] .btn-comprar {
+  background: #3c8ee8;
+}
+
+[data-theme="dark"] .btn-comprar:hover {
+  background: #2e73c5;
+}
+
+[data-theme="dark"] .sem-produtos {
+  color: #999;
+}
+
+[data-theme="dark"] .ecoloja-categoria-titulo h2 {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .ecoloja-categoria-titulo p {
+  color: #cccccc;
+}

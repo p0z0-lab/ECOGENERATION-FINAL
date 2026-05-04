@@ -221,11 +221,277 @@ p{
   gap: 8px;
 }
 
-/* Banner */
-.banner img {
+/* Hero Banner */
+.hero-carousel {
+  position: relative;
+  overflow: hidden;
   width: 100%;
+  max-width: 1200px;
+  margin: 20px auto 40px;
+  padding: 0;
+}
+
+.hero-slides {
+  display: flex;
+  transform: translateX(0);
+  transition: transform 0.45s ease;
+  width: 100%;
+}
+
+.hero-slide {
+  min-width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.hero-carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(31, 102, 40, 0.85);
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+}
+
+.hero-prev {
+  left: 12px;
+}
+
+.hero-next {
+  right: 12px;
+}
+
+.hero-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  padding: 28px 34px;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  border-radius: 28px;
+  overflow: hidden;
+  background: linear-gradient(150deg, #e7f5d8 0%, #d9f1e0 32%, #ebf7ff 100%);
+  box-shadow: 0 18px 80px rgba(18, 65, 36, 0.08);
+}
+
+.hero-banner-2 {
+  background: linear-gradient(150deg, #a9e0ee 0%, #acffff 32%, #afdfff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  padding: 28px 34px;
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  border-radius: 28px;
+  overflow: hidden;
+}
+
+
+.hero-banner > * {
+  min-width: 0;
+}
+
+.hero-banner-figure,
+.hero-banner-figure-2 {
+  flex: 0 0 32%;
+  max-width: 32%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  order: 1;
+}
+
+.hero-banner-figure img,
+.hero-banner-figure-2 img {
+  width: 88%;
+  max-width: 88%;
   height: auto;
+  margin: 0;
+}
+
+.hero-banner-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  flex: 1 1 45%;
+  max-width: 45%;
+  order: 2;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.hero-banner-copy-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 18px;
+  flex: 1 1 58%;
+  max-width: 58%;
+  order: 2;
+  text-align: left;
+  margin: 0;
+}
+
+.hero-banner-copy h1,
+.hero-banner-copy-2 h1 {
+  font-size: clamp(2.6rem, 4vw, 4.2rem);
+  line-height: 1.02;
+  margin-bottom: 10px;
+  color: #154a24;
+  letter-spacing: -0.03em;
+}
+
+.hero-banner-copy h1 .hero-banner-title-line,
+.hero-banner-copy-2 h1 .hero-banner-title-line {
   display: block;
+}
+
+.hero-banner-copy h1 .hero-banner-title-line:nth-child(2),
+.hero-banner-copy h1 .hero-banner-title-line:nth-child(3),
+.hero-banner-copy-2 h1 .hero-banner-title-line:nth-child(2),
+.hero-banner-copy-2 h1 .hero-banner-title-line:nth-child(3) {
+  color: #0e92c2;
+}
+@media (min-width: 1024px) {
+  .hero-banner-copy h1 {
+    font-size: clamp(2.4rem, 3.1vw, 3.6rem);
+  }
+
+  .hero-banner-copy h1 .hero-banner-title-line {
+    display: block;
+  }
+}
+.hero-banner-copy p { display: none; }
+
+.hero-banner-copy p {
+  font-size: 2rem;
+  line-height: 1.8;
+  color: #2f5f37;
+  margin-bottom: 28px;
+  max-width: 520px;
+}
+
+.hero-banner-button{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: 16px 42px;
+  background: #0e92c2;
+  color: #fff;
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 14px 32px rgba(14, 146, 194, 0.32);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  margin: 10px auto 0;
+}
+
+.hero-banner-button-2:hover {
+  background: #175223;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(31, 102, 40, 0.22);
+
+}
+
+.hero-banner-button-2 {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 40px;
+  background: #0e92c2;
+  color: #fff;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  box-shadow: 0 12px 28px rgba(14, 146, 194, 0.28);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  margin: 18px 0 0 0;
+}
+
+.hero-banner-button-2:hover {
+  background: #175223;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(31, 102, 40, 0.22);
+}
+
+/* Hero dark mode */
+[data-theme="dark"] .hero-banner,
+[data-theme="dark"] .hero-banner-2 {
+  background: linear-gradient(135deg, #162a14 0%, #163028 50%, #0f1922 100%);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .hero-banner-copy h1,
+[data-theme="dark"] .hero-banner-copy-2 h1 {
+  color: #e5f7df;
+}
+
+[data-theme="dark"] .hero-banner-copy p,
+[data-theme="dark"] .hero-banner-copy-2 p {
+  color: #d2ddc4;
+}
+
+[data-theme="dark"] .hero-banner-button,
+[data-theme="dark"] .hero-banner-button-2 {
+  background: #2e7d32;
+}
+
+[data-theme="dark"] .hero-banner-button:hover,
+[data-theme="dark"] .hero-banner-button-2:hover {
+  background: #1b5e20;
+}
+
+[data-theme="dark"] .hero-banner-figure img,
+[data-theme="dark"] .hero-banner-figure-2 img {
+  filter: brightness(0.95);
+}
+
+@media (max-width: 860px) {
+  .hero-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 28px 18px;
+  }
+
+  .hero-banner-copy {
+    max-width: 100%;
+    order: 2;
+    text-align: center;
+  }
+
+  .hero-banner-figure {
+    flex: 1;
+    justify-content: center;
+    margin-top: 24px;
+    order: 1;
+  }
 }
 
 /* Main */
@@ -585,5 +851,40 @@ footer {
 
 .descricao{
  color:#003104
+}
+
+/* ── DARK MODE ──────────────────────────────────────────── */
+[data-theme="dark"] body {
+  background: #121212;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] h1,
+[data-theme="dark"] h2,
+[data-theme="dark"] h3,
+[data-theme="dark"] h4,
+[data-theme="dark"] h5,
+[data-theme="dark"] h6 {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] p {
+  color: #cccccc;
+}
+
+[data-theme="dark"] .btn-diagnostico {
+  background-color: #2e7d32;
+}
+
+[data-theme="dark"] .btn-diagnostico:hover {
+  background-color: #1b5e20;
+}
+
+[data-theme="dark"] .produtos-destaque {
+  color: #7fcf80;
+}
+
+[data-theme="dark"] .descricao {
+  color: #a0d995;
 }
 

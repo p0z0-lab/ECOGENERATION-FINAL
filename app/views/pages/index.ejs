@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" data-theme="light">
 
 <head>
   <meta charset="UTF-8">
@@ -11,23 +11,7 @@
   <link rel="icon" href="/imagens/favicon2.png" type="image/png">
   
 
-  <!-- Open Graph (OG) — cartão de visitas nas redes sociais -->
-  <meta property="og:locale" content="pt_BR">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="EcoGeneration — Autonomia Energética para Todos">
-  <meta property="og:description" content="Descubra seu nível de autonomia energética e encontre soluções solares portáteis e acessíveis para sua realidade.">
-  <meta property="og:url" content="https://ecogeneration-final-4hh3.onrender.com">
-  <meta property="og:site_name" content="EcoGeneration">
-  <meta property="og:image" content="https://ecogeneration-final-4hh3.onrender.com/imagens/favicon2.png">
-  <meta property="og:image:secure_url" content="https://ecogeneration-final-4hh3.onrender.com/imagens/favicon2.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="EcoGeneration — Autonomia Energética">
-  <!-- Twitter/X Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="EcoGeneration — Autonomia Energética para Todos">
-  <meta name="twitter:description" content="Descubra seu nível de autonomia energética e encontre soluções solares portáteis e acessíveis para sua realidade.">
-  <meta name="twitter:image" content="https://ecogeneration-final-4hh3.onrender.com/imagens/favicon2.png">
+ <%- include("../partials/open-graph") %>
   <!-- PWA -->
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#2e7d32">
@@ -38,10 +22,38 @@
   
  <%- include("../partials/header") %>  
   
-  <figure class="banner">
-    <img src="imagens/economize (1).png" alt="Banner sobre sustentabilidade com turbina eólica e painel solar">
-    <figcaption class="visually-hidden">Imagem promocional sobre sustentabilidade</figcaption>
-  </figure>
+  <section class="hero-carousel" aria-label="Carrossel de banners">
+    <section class="hero-slides">
+      <article class="hero-banner hero-slide">
+        <figure class="hero-banner-figure">
+          <img src="/imagens/itens-para-o-bunner.png" alt="Equipamentos solares para o dia a dia">
+        </figure>
+        <section class="hero-banner-copy">
+          <h1>
+            <span class="hero-banner-title-line">SUSTENTABILIDADE</span>
+            <span class="hero-banner-title-line">QUE CABE NO DIA</span>
+            <span class="hero-banner-title-line">A DIA</span>
+          </h1>
+          <a href="/ecoloja" class="hero-banner-button">IR PARA LOJA</a>
+        </section>
+      </article>
+
+      <article class="hero-banner hero-banner-2 hero-slide">
+        <figure class="hero-banner-figure-2">
+          <img src="/imagens/celular-bunner.svg" alt="Equipamentos solares para o dia a dia">
+        </figure>
+        <section class="hero-banner-copy-2">
+          <h1>FAÇA SEU DIAGNÓSTICO E NÃO DEPENDA DA REDE ELÉTRICA</h1>
+          <a href="/diagnostico" class="hero-banner-button-2">FAZER DIAGNÓSTICO</a>
+        </section>
+      </article>
+    </section>
+
+    <button type="button" class="hero-carousel-button hero-prev" aria-label="Anterior">‹</button>
+    <button type="button" class="hero-carousel-button hero-next" aria-label="Próximo">›</button>
+  </section>
+ 
+ 
 <main>
   <section class="why-ecogeneration">
     <h2 class="why">Por que escolher EcoGeneration?</h2>
@@ -159,6 +171,30 @@ Responda algumas perguntas rápidas para receber uma análise personalizada e en
  
 
  </main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const slidesContainer = document.querySelector('.hero-slides');
+    const slides = document.querySelectorAll('.hero-slide');
+    const prevButton = document.querySelector('.hero-prev');
+    const nextButton = document.querySelector('.hero-next');
+    let currentIndex = 0;
+
+    const updateCarousel = () => {
+      slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+    };
+
+    prevButton.addEventListener('click', () => {
+      currentIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
+      updateCarousel();
+    });
+
+    nextButton.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateCarousel();
+    });
+  });
+</script>
 </body>
    <%- include("../partials/footer") %>   
 </html>
