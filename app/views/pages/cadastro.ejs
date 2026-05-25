@@ -116,19 +116,8 @@
       <section class="ui pointing red basic label"><%= errors.telefone.msg %></section>
       <% } %>
 
-      <label for="rg">RG (Opcional)</label>
-      <input
-        type="text"
-        id="rg"
-        name="rg"
-        data-mask="rg"
-        value="<%= old.rg ? old.rg : '' %>"
-        placeholder="0.000.000-00"
-        maxlength="12"
-      />
-      <% if (errors.rg) { %>
-      <section class="ui pointing red basic label"><%= errors.rg.msg %></section>
-      <% } %>
+      
+     
 
       <label for="senha">Senha</label>
       <input
