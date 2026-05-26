@@ -31,6 +31,9 @@
     border-radius: 5px;
     border: 1px solid #ddd;
 }
+.diagnostico-header{
+    background-color: #ffffff;
+}
 
 .pergunta h3 {
     margin-bottom: 10px;
@@ -51,8 +54,29 @@
     background-color: #f0f0f0;
 }
 
-.pergunta input[type="radio"] {
+.pergunta input[type="radio"],
+.pergunta input[type="checkbox"] {
     margin-right: 10px;
+}
+
+.checkbox-option {
+    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: inline-flex;
+    align-items: center;
+    background-color: #fafafa;
+}
+
+.checkbox-option:hover {
+    background-color: #f0f0f0;
+}
+
+.checkbox-hint {
+    margin: 0 0 10px;
+    color: #555;
+    font-size: 0.95rem;
 }
 
 .btn-submit {
@@ -94,8 +118,25 @@
     color: #e0e0e0;
 }
 
+[data-theme="dark"] .pergunta legend,
+[data-theme="dark"] .pergunta label,
+[data-theme="dark"] .checkbox-option,
+[data-theme="dark"] .diagnostico-form fieldset.pergunta legend,
+[data-theme="dark"] .diagnostico-form fieldset.pergunta label {
+    color: #e0e0e0;
+}
+
 [data-theme="dark"] .pergunta label:hover {
     background-color: #333;
+}
+
+[data-theme="dark"] .checkbox-option {
+    background-color: #242424;
+    border-color: #555;
+}
+
+[data-theme="dark"] .checkbox-hint {
+    color: #bbbbbb;
 }
 
 [data-theme="dark"] .btn-submit {

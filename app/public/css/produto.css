@@ -4,6 +4,10 @@
   padding: 2rem 1rem;
 }
 
+.produto-detalhe-header{
+  background-color: #f9f9f9; /* leve fundo claro, combina com login */
+}
+
 .produto-breadcrumb {
   font-size: 0.9rem;
   color: #fff;

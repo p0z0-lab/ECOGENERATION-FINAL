@@ -1,4 +1,5 @@
 var express = require("express");
+const bcrypt = require("bcryptjs");
 const { produtosModel } = require("../models/produtosModel");
 const { diagnosticosModel } = require("../models/diagnosticosModel");
 const { usuariosModel } = require("../models/usuariosModel");
@@ -78,8 +79,15 @@ function requireLogin(req, res, next) {
 }
 
 // ===== PAGINA INICIAL =====
-router.get("/", function (req, res) {
-    res.render("index", { titulo: "Pagina inicial" });
+router.get("/", async function (req, res) {
+    try {
+        const rotasDestaque = ["ventilador", "powerbank", "lampadasolar"];
+        const produtosDestaque = await produtosModel.findByRotaList(rotasDestaque);
+        res.render("index", { titulo: "Pagina inicial", produtosDestaque });
+    } catch (erro) {
+        console.log(erro);
+        res.render("index", { titulo: "Pagina inicial", produtosDestaque: [] });
+    }
 });
 
 // ===== ECOLOJA =====
@@ -283,7 +291,8 @@ router.post('/login',
                 });
             }
             const usuario = usuarios[0];
-            if (req.body.senha !== usuario.senha_usuario) {
+            const senhaCorreta = await bcrypt.compare(req.body.senha, usuario.senha_usuario);
+            if (!senhaCorreta) {
                 return res.render('login', {
                     errors: { geral: { msg: 'Email ou senha inválidos.' } },
                     old: req.body
@@ -330,18 +339,25 @@ router.post('/diagnostico', requireLogin, async (req, res) => {
         case 'afeta_bastante': pontuacao -= 5; break;
         case 'afeta_muito': pontuacao -= 10; break;
     }
-    switch (preparacao) {
-        case 'sistema_completo': pontuacao += 10; break;
-        case 'power_bank': pontuacao += 5; break;
-        case 'lanternas': pontuacao -= 5; break;
-        case 'nenhuma': pontuacao -= 10; break;
-    }
+
+    const preparacoes = Array.isArray(preparacao) ? preparacao : preparacao ? [preparacao] : [];
+    preparacoes.forEach((item) => {
+        switch (item) {
+            case 'sistema_completo': pontuacao += 10; break;
+            case 'power_bank': pontuacao += 5; break;
+            case 'lanternas': pontuacao -= 5; break;
+            case 'vela': pontuacao -= 5; break;
+            case 'nenhuma': pontuacao -= 10; break;
+        }
+    });
+
     switch (prioridade) {
         case 'iluminacao': pontuacao += 5; break;
         case 'celular': pontuacao += 0; break;
         case 'geladeira': pontuacao -= 5; break;
         case 'trabalho': pontuacao -= 10; break;
     }
+
     switch (tolerancia) {
         case 'um_dia': pontuacao += 10; break;
         case 'algumas_horas': pontuacao += 5; break;
@@ -354,7 +370,11 @@ router.post('/diagnostico', requireLogin, async (req, res) => {
     try {
         await diagnosticosModel.create({
             id_usuario: req.session.usuarioId ? parseInt(req.session.usuarioId) : null,
-            frequencia, impacto, preparacao, prioridade, tolerancia,
+            frequencia,
+            impacto,
+            preparacao: preparacoes.join(', '),
+            prioridade,
+            tolerancia,
             nivel_autonomia: nivel
         });
     } catch (erro) {
@@ -362,7 +382,8 @@ router.post('/diagnostico', requireLogin, async (req, res) => {
     }
 
     const categoria = nivel === 'alta' ? 'avancado' : nivel === 'media' ? 'medio' : 'entrada';
-    const produtosRecomendados = await produtosModel.findByCategoria(categoria);
+    let produtosRecomendados = await produtosModel.findByCategoria(categoria);
+    produtosRecomendados = produtosRecomendados.sort((a, b) => parseFloat(a.preco_produto) - parseFloat(b.preco_produto));
     res.render('resultado', { nivel, produtosRecomendados });
 });
 

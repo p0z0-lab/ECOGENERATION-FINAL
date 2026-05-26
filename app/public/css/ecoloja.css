@@ -4,9 +4,15 @@
   padding: 2rem 1rem;
 }
 
+.produto-rodape{
+ 
+  background-color: #f9f9f9;
+}
+
 .ecoloja-header {
   text-align: center;
   margin-bottom: 2.5rem;
+  background-color: #f9f9f9; /* leve fundo claro, combina com login */
 }
 
 .ecoloja-header h1 {
@@ -404,4 +410,8 @@
 
 [data-theme="dark"] .ecoloja-categoria-titulo p {
   color: #cccccc;
+}
+
+[data-theme="dark"] .produto-rodape {
+  background-color: #2a2a2a;
 }

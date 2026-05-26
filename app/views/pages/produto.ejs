@@ -3,81 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="keywords" content="produtos solares, <% if(produto && produto.nome_produto) { %><%= produto.nome_produto.toLowerCase() %>,<% } %> energia solar, sustentabilidade, compra online">
-  <meta name="description" content="<% if(produto && produto.descricao_produto) { %><%= produto.descricao_produto.substring(0, 160) %>...<% } else { %>Descubra nossos produtos solares portáteis<% } %>">
   <title><%= produto.nome_produto %> — EcoGeneration</title>
+  <meta name="description" content="<%= produto.descricao_produto %>. Compre na EcoGeneration.">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="<%= produto.descricao_produto %> Compre com segurança na EcoGeneration.">
+  <meta name="robots" content="index, follow">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/produto.css">
   <link rel="icon" href="/imagens/favicon2.png" type="image/png">
-
-  <!-- Open Graph dinâmico — usa dados reais do produto -->
+  <!-- OG dinâmico -->
   <meta property="og:locale" content="pt_BR">
   <meta property="og:type" content="website">
   <meta property="og:title" content="<%= produto.nome_produto %> — EcoGeneration">
   <meta property="og:description" content="<%= produto.descricao_produto %>">
   <meta property="og:url" content="https://ecogeneration-final-4hh3.onrender.com/produto/<%= produto.id_produto %>">
   <meta property="og:site_name" content="EcoGeneration">
-  <meta property="og:image" content="https://ecogeneration-final-4hh3.onrender.com/imagens/og-cover-v2.png">
-  <meta property="og:image:secure_url" content="https://ecogeneration-final-4hh3.onrender.com/imagens/og-cover-v2.png">
-  <meta property="og:image:type" content="image/png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image" content="https://ecogeneration-final-4hh3.onrender.com/imagens/<%= produto.imagem_produto %>">
   <meta property="og:image:alt" content="<%= produto.nome_produto %>">
-  <!-- Twitter/X Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="<%= produto.nome_produto %> — EcoGeneration">
   <meta name="twitter:description" content="<%= produto.descricao_produto %>">
-  <meta name="twitter:image" content="https://ecogeneration-final-4hh3.onrender.com/imagens/og-cover-v2.png">
-  <!-- PWA -->
+  <meta name="twitter:image" content="https://ecogeneration-final-4hh3.onrender.com/imagens/<%= produto.imagem_produto %>">
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#2e7d32">
 </head>
 <body>
+  
+
   <%- include('../partials/header') %>
 
-  <main class="produto-container">
+  <main class="produto-container" id="conteudo-principal">
 
-    <nav class="produto-breadcrumb" aria-label="Navegação">
-      <a href="/">Início</a>
-      <span>›</span>
-      <a href="/ecoloja">EcoLoja</a>
-      <span>›</span>
-      <span><%= produto.nome_produto %></span>
-    </nav>
-
-    <article class="produto-detalhe">
+    <!-- WCAG 2.4.8 — breadcrumb com aria-label e aria-current -->
+  
+    <article class="produto-detalhe" aria-label="Detalhes do produto <%= produto.nome_produto %>">
 
       <figure class="produto-detalhe-img">
-        <img src="/imagens/<%= produto.imagem_produto %>" alt="<%= produto.nome_produto %>">
+        <img
+          src="/imagens/<%= produto.imagem_produto %>"
+          alt="<%= produto.nome_produto %> — imagem do produto"
+        >
       </figure>
 
       <section class="produto-detalhe-info">
 
-       
-          <span class="produto-detalhe-categoria"><%= produto.categoria_produto %></span>
+        <header class="produto-detalhe-header">
+          <!-- WCAG 1.4.3 — badge com contraste adequado (#1b5e20 sobre #e8f5e9 = 7.2:1) -->
+          <span class="produto-detalhe-categoria" aria-label="Categoria: <%= produto.categoria_produto %>">
+            <%= produto.categoria_produto %>
+          </span>
           <h1><%= produto.nome_produto %></h1>
-     
+        </header>
 
-        <p class="produto-detalhe-preco">R$ <%= produto.preco_produto %></p>
+        <!-- WCAG 1.3.1 — preço com aria-label descritivo -->
+        <p class="produto-detalhe-preco" aria-label="Preço: R$ <%= produto.preco_produto %>">
+          R$ <%= produto.preco_produto %>
+        </p>
 
         <p class="produto-detalhe-descricao"><%= produto.descricao_produto %></p>
 
-        <section class="produto-estoque">
+        <section class="produto-estoque" aria-live="polite">
           <% if (produto.estoque_produto > 0) { %>
-            <span class="badge-estoque disponivel">✓ Em estoque (<%= produto.estoque_produto %> unidades)</span>
+            <span class="badge-estoque disponivel" role="status">
+              ✓ Em estoque (<%= produto.estoque_produto %> unidades)
+            </span>
           <% } else { %>
-            <span class="badge-estoque indisponivel">✗ Fora de estoque</span>
+            <span class="badge-estoque indisponivel" role="status">
+              ✗ Fora de estoque
+            </span>
           <% } %>
         </section>
 
-        <nav class="produto-detalhe-acoes">
+        <nav class="produto-detalhe-acoes" aria-label="Ações do produto">
           <% if (produto.estoque_produto > 0) { %>
-            <a href="/confirmar-compra/<%= produto.id_produto %>" class="btn-comprar-detalhe">
+            <a
+              href="/confirmar-compra/<%= produto.id_produto %>"
+              class="btn-comprar-detalhe"
+              aria-label="Comprar <%= produto.nome_produto %> por R$ <%= produto.preco_produto %>"
+            >
               Comprar agora
             </a>
           <% } else { %>
-            <button class="btn-comprar-detalhe disabled" disabled>Indisponível</button>
+            <button class="btn-comprar-detalhe disabled" disabled aria-disabled="true">
+              Indisponível
+            </button>
           <% } %>
           <a href="/ecoloja" class="btn-voltar-loja">← Voltar à loja</a>
         </nav>

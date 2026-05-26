@@ -57,6 +57,51 @@
     return true;
   }
 
+  function validateCPF() {
+    const input = document.getElementById('cpf');
+    if (!input) return true;
+    const v = input.value.replace(/\D/g, '');
+    
+    if (!v) { 
+      showError(input, 'CPF é obrigatório.'); 
+      return false; 
+    }
+    
+    if (v.length !== 11) { 
+      showError(input, 'CPF deve ter 11 dígitos.'); 
+      return false; 
+    }
+    
+    // Validar se todos os dígitos são iguais
+    if (/^(\d)\1{10}$/.test(v)) {
+      showError(input, 'CPF inválido.');
+      return false;
+    }
+    
+    // Algoritmo de validação do CPF
+    let sum = 0;
+    let remainder;
+    for (let i = 1; i <= 9; i++) sum += parseInt(v.substring(i - 1, i)) * (11 - i);
+    remainder = (sum * 10) % 11;
+    if (remainder === 10 || remainder === 11) remainder = 0;
+    if (remainder !== parseInt(v.substring(9, 10))) {
+      showError(input, 'CPF inválido.');
+      return false;
+    }
+    
+    sum = 0;
+    for (let i = 1; i <= 10; i++) sum += parseInt(v.substring(i - 1, i)) * (12 - i);
+    remainder = (sum * 10) % 11;
+    if (remainder === 10 || remainder === 11) remainder = 0;
+    if (remainder !== parseInt(v.substring(10, 11))) {
+      showError(input, 'CPF inválido.');
+      return false;
+    }
+    
+    removeFrontendError(input);
+    return true;
+  }
+
   function addListeners(id, fn) {
     const el = document.getElementById(id);
     if (!el) return;
@@ -69,6 +114,7 @@
     addListeners('email', validateEmail);
     addListeners('senha', validateSenha);
     addListeners('confirmar-senha', validateConfirmar);
+    addListeners('cpf', validateCPF);
 
     const cadastroForm = document.getElementById('cadastro-form');
     if (cadastroForm) {
@@ -78,7 +124,8 @@
         const okEmail = validateEmail();
         const okSenha = validateSenha();
         const okConfirm = validateConfirmar();
-        if (!okNome || !okEmail || !okSenha || !okConfirm) {
+        const okCPF = validateCPF();
+        if (!okNome || !okEmail || !okSenha || !okConfirm || !okCPF) {
           ev.preventDefault();
         }
         // se tudo ok, deixa o formulário enviar normalmente pro servidor

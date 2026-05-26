@@ -593,3 +593,601 @@ footer {
     font-size: 1.5rem;
   }
 }
+/* ── WCAG / ACESSIBILIDADE ── */
+
+/* Skip link (WCAG 2.4.1) */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: #2e7d32;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 0 0 8px 0;
+  font-weight: 700;
+  font-size: 1rem;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Visually hidden — acessível a screen readers */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Breadcrumb (WCAG 2.4.8) */
+.breadcrumb {
+  max-width: 1100px;
+  margin: 12px auto 0;
+  padding: 0 20px;
+}
+
+.breadcrumb ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.88rem;
+  color: #666;
+}
+
+.breadcrumb li + li::before {
+  content: "›";
+  margin-right: 4px;
+  color: #999;
+}
+
+.breadcrumb a {
+  color: #2e7d32;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover { text-decoration: underline; }
+
+.breadcrumb [aria-current="page"] { color: #555; }
+
+/* Erro de formulário acessível */
+.erro-geral {
+  background: #ffebee;
+  border-left: 4px solid #c62828;
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  color: #b71c1c;
+  font-size: 0.95rem;
+}
+
+.form-erro-msg {
+  background: #ffebee;
+  border-left: 4px solid #c62828;
+  border-radius: 6px;
+  padding: 10px 14px;
+  color: #b71c1c;
+  font-size: 0.9rem;
+  margin-top: 8px;
+}
+
+/* Dica de campo */
+.campo-dica {
+  font-size: 0.82rem;
+  color: #777;
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+
+/* Feedback diagnóstico salvo (Nielsen #1) */
+.resultado-salvo {
+  background: #e8f5e9;
+  border: 1px solid #a5d6a7;
+  border-left: 4px solid #2e7d32;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  color: #1b5e20;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Cor do botão comprar com contraste WCAG AA */
+.btn-comprar {
+  background: #0277bd !important;
+  color: #fff !important;
+}
+.btn-comprar:hover {
+  background: #01579b !important;
+}
+
+/* Produto detalhe categoria — contraste corrigido */
+.produto-detalhe-categoria {
+  background: #e8f5e9;
+  color: #1b5e20 !important;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+/* fieldset acessível */
+fieldset.pergunta {
+  border: 1px solid #c8e6c9;
+  border-radius: 10px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+}
+
+fieldset.pergunta legend {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #1a1a1a;
+  padding: 0 8px;
+}
+
+/* ============================================================
+   ACESSIBILIDADE — WCAG / WAI / W3C
+   ============================================================ */
+
+/* WCAG 2.4.1 — Skip link: pular para conteúdo principal */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: #2e7d32;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  z-index: 9999;
+  border-radius: 0 0 8px 0;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #fff;
+  outline-offset: 2px;
+}
+
+/* WCAG 1.4.11 — Foco visível em todos os elementos interativos */
+:focus-visible {
+  outline: 3px solid #2e7d32;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Visually hidden — oculta visualmente mas mantém para leitores de tela */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================================
+   FORMULÁRIOS — WCAG 3.3 / Nielsen H9
+   ============================================================ */
+
+.form-container {
+  max-width: 480px;
+  margin: 2.5rem auto;
+  padding: 2rem 1.5rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+
+.form-container h1 {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.form-descricao {
+  color: #555;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.campo-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 1.2rem;
+}
+
+.campo-grupo label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.campo-grupo input {
+  padding: 10px 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+}
+
+.campo-grupo input:focus {
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 3px rgba(46,125,50,0.15);
+  outline: none;
+}
+
+/* WCAG 1.4.1 — erro não indicado só por cor */
+.campo-grupo input.campo-erro {
+  border-color: #c62828;
+  background: #fff8f8;
+}
+
+.msg-erro {
+  font-size: 0.85rem;
+  color: #c62828;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.msg-erro::before {
+  content: "⚠ ";
+  aria-hidden: true;
+}
+
+.dica-campo {
+  font-size: 0.82rem;
+  color: #666;
+}
+
+.campo-obrigatorio {
+  color: #c62828;
+  margin-left: 2px;
+  font-weight: 700;
+}
+
+.campo-obrigatorio-nota {
+  font-size: 0.82rem;
+  color: #666;
+  margin-bottom: 1.2rem;
+}
+
+.erro-geral {
+  background: #ffebee;
+  border-left: 4px solid #c62828;
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 1.2rem;
+  color: #c62828;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.form-acoes {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+/* WCAG 1.4.3 — contraste mínimo 4.5:1 */
+.btn-primario {
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 11px 28px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-primario:hover { background: #1b5e20; }
+
+.btn-secundario {
+  background: #f5f5f5;
+  color: #333;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  padding: 11px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-secundario:hover { background: #e0e0e0; }
+
+.link-cadastro {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1.2rem;
+}
+
+.link-cadastro a {
+  color: #2e7d32;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* ============================================================
+   FORMULÁRIO DE DIAGNÓSTICO — WCAG 1.3.1 / fieldset/legend
+   ============================================================ */
+
+.diagnostico-container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.diagnostico-header {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.diagnostico-header h1 {
+  font-size: 1.6rem;
+  color: #2e7d32;
+  margin-bottom: 0.5rem;
+}
+
+.diagnostico-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* WCAG 1.3.1 — fieldset com legend, não h3 solto */
+.diagnostico-form fieldset.pergunta {
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 1.2rem 1.5rem;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.diagnostico-form fieldset.pergunta legend {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  padding: 0 8px;
+}
+
+.diagnostico-form label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #333;
+  transition: background 0.15s;
+}
+
+.diagnostico-form label:hover {
+  background: #e8f5e9;
+}
+
+.diagnostico-form input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #2e7d32;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* WCAG 2.4.7 — foco visível nos radios */
+.diagnostico-form input[type="radio"]:focus-visible {
+  outline: 3px solid #2e7d32;
+  outline-offset: 2px;
+}
+
+.btn-submit {
+  background: #2e7d32;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 14px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-submit:hover {
+  background: #1b5e20;
+  transform: translateY(-1px);
+}
+
+.form-feedback {
+  background: #ffebee;
+  border-left: 4px solid #c62828;
+  border-radius: 6px;
+  padding: 10px 14px;
+  color: #c62828;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+/* ============================================================
+   DARK MODE — acessibilidade de contraste
+   ============================================================ */
+
+[data-theme="dark"] .form-container {
+  background: #1e1e1e;
+}
+
+[data-theme="dark"] .campo-grupo input {
+  background: #2a2a2a;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .diagnostico-form fieldset.pergunta {
+  background: #1e1e1e;
+  border-color: #333;
+}
+
+[data-theme="dark"] .diagnostico-form label {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] .diagnostico-form label:hover {
+  background: rgba(46,125,50,0.2);
+}
+
+/* ============================================================
+   WCAG / ACESSIBILIDADE — adicionado automaticamente
+   ============================================================ */
+
+/* Skip link — WCAG 2.4.1 */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 12px;
+  z-index: 9999;
+  background: #2e7d32;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 0 0 8px 8px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid #f9a825;
+  outline-offset: 2px;
+}
+
+/* Visually hidden — conteúdo só para leitores de tela */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Erros de formulário — WCAG 3.3.1 */
+.campo-erro {
+  color: #c62828;
+  font-size: 0.88rem;
+  margin-top: 4px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.campo-erro::before { content: "⚠ "; }
+
+.campo-dica {
+  color: #555;
+  font-size: 0.82rem;
+  margin-top: 3px;
+}
+
+.erro-geral {
+  background: #ffebee;
+  border-left: 4px solid #c62828;
+  border-radius: 6px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  color: #c62828;
+  font-weight: 600;
+}
+
+/* Feedback de diagnóstico salvo — Heurística Nielsen 1 */
+.diagnostico-salvo {
+  background: #e8f5e9;
+  border-left: 4px solid #2e7d32;
+  border-radius: 6px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  color: #1b5e20;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+/* Focus visível — WCAG 2.4.7 */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid #f9a825;
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* Botões desabilitados — WCAG 1.4.3 */
+button:disabled,
+.btn-comprar-detalhe.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Footer acessível */
+footer[role="contentinfo"] {
+  background: #2e7d32;
+  color: #fff;
+  padding: 24px 20px;
+  text-align: center;
+}
+
+footer[role="contentinfo"] nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+footer[role="contentinfo"] nav a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+footer[role="contentinfo"] nav a:hover,
+footer[role="contentinfo"] nav a:focus-visible {
+  color: #fff;
+  text-decoration: underline;
+}

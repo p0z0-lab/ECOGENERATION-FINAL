@@ -3,80 +3,93 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="keywords" content="resultado diagnóstico, autonomia energética, recomendações solares, energia renovável">
-  <meta name="description" content="Veja seu resultado de autonomia energética e receba recomendações personalizadas de produtos.">
-  <title>Resultado — EcoGeneration</title>
+  <title>Resultado do Diagnóstico — EcoGeneration</title>
+  <meta name="description" content="Veja seu nível de autonomia energética e os produtos recomendados especialmente para você.">
+  <meta name="robots" content="noindex, follow">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/resultado.css">
   <link rel="apple-touch-icon" href="/imagens/favicon2.png">
   <link rel="icon" href="/imagens/favicon2.png" type="image/png">
-
-  <!-- Open Graph (OG) — cartão de visitas nas redes sociais -->
   <meta property="og:locale" content="pt_BR">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Resultado do Diagnóstico — EcoGeneration">
   <meta property="og:description" content="Veja seu nível de autonomia energética e os produtos recomendados especialmente para você.">
-  <meta property="og:url" content="https://ecogeneration-final-4hh3.onrender.com">
+  <meta property="og:url" content="https://ecogeneration-final-4hh3.onrender.com/diagnostico">
   <meta property="og:site_name" content="EcoGeneration">
   <meta property="og:image" content="https://ecogeneration-final-4hh3.onrender.com/imagens/og-cover-v2.png">
   <meta property="og:image:secure_url" content="https://ecogeneration-final-4hh3.onrender.com/imagens/og-cover-v2.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="EcoGeneration — Autonomia Energética">
-  <!-- Twitter/X Card -->
+  <meta property="og:image:alt" content="EcoGeneration — Resultado do Diagnóstico">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Resultado do Diagnóstico — EcoGeneration">
-  <meta name="twitter:description" content="Veja seu nível de autonomia energética e os produtos recomendados especialmente para você.">
+  <meta name="twitter:description" content="Veja seu nível de autonomia energética e os produtos recomendados para você.">
   <meta name="twitter:image" content="https://ecogeneration-final-4hh3.onrender.com/imagens/og-cover-v2.png">
-  <!-- PWA -->
   <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#2e7d32">
 </head>
 <body>
   <%- include('../partials/header') %>
 
-  <main class="resultado-container">
+  <main class="resultado-container" id="conteudo-principal" tabindex="-1">
 
     <header class="resultado-header">
       <h1>Resultado do Diagnóstico</h1>
     </header>
 
-    <% if (nivel === 'alta') { %>
-      <section class="resultado alta">
-        <h2>Autonomia Energética: Alta</h2>
-        <p>Você está bem preparado para quedas de energia. Confira produtos avançados para maximizar sua autonomia.</p>
-      </section>
-    <% } else if (nivel === 'media') { %>
-      <section class="resultado media">
-        <h2>Autonomia Energética: Média</h2>
-        <p>Você tem alguma preparação, mas ainda há espaço para melhorias. Veja nossas recomendações.</p>
-      </section>
-    <% } else { %>
-      <section class="resultado baixa">
-        <h2>Autonomia Energética: Baixa</h2>
-        <p>Você depende fortemente da rede elétrica. Recomendamos começar com produtos acessíveis para aumentar sua autonomia.</p>
-      </section>
-    <% } %>
+    <!-- WCAG 4.1.3 — aria-live assertive anuncia o resultado para leitores de tela -->
+    <section aria-live="assertive" aria-atomic="true">
+      <% if (nivel === 'alta') { %>
+        <section class="resultado alta" role="status">
+          <h2>✅ Autonomia Energética: Alta</h2>
+          <p>Você está bem preparado para quedas de energia. Confira produtos avançados para maximizar sua autonomia.</p>
+        </section>
+      <% } else if (nivel === 'media') { %>
+        <section class="resultado media" role="status">
+          <h2>⚡ Autonomia Energética: Média</h2>
+          <p>Você tem alguma preparação, mas ainda há espaço para melhorias. Veja nossas recomendações.</p>
+        </section>
+      <% } else { %>
+        <section class="resultado baixa" role="status">
+          <h2>⚠️ Autonomia Energética: Baixa</h2>
+          <p>Você depende fortemente da rede elétrica. Recomendamos começar com produtos acessíveis para aumentar sua autonomia.</p>
+        </section>
+      <% } %>
+    </section>
 
-    <section class="recomendacoes" aria-label="Produtos recomendados">
-      <h2>Produtos recomendados para você</h2>
-      <section class="produtos-grid">
+    <!-- Heurística Nielsen 1 — feedback claro de que o diagnóstico foi salvo -->
+    <section class="diagnostico-salvo" role="status" aria-label="Diagnóstico salvo">
+      <p>✓ Seu diagnóstico foi salvo com sucesso no seu perfil.</p>
+    </section>
+
+    <section class="recomendacoes" aria-labelledby="titulo-recomendacoes">
+      <h2 id="titulo-recomendacoes">Produtos recomendados para você</h2>
+      <section class="produtos-grid" role="list">
         <% produtosRecomendados.forEach(function(produto) { %>
-          <article class="produto-card">
+          <article class="produto-card" role="listitem">
             <header class="produto-categoria">
               <span><%= produto.categoria_produto %></span>
             </header>
             <figure class="produto-figura">
-              <img src="/imagens/<%= produto.imagem_produto %>" alt="<%= produto.nome_produto %>" class="produto-img">
+              <img src="/imagens/<%= produto.imagem_produto %>"
+                   alt="Foto do produto: <%= produto.nome_produto %>"
+                   class="produto-img"
+                   loading="lazy">
             </figure>
             <section class="produto-info">
               <h3 class="produto-nome"><%= produto.nome_produto %></h3>
               <p class="produto-desc"><%= produto.descricao_produto %></p>
               <footer class="produto-rodape">
-                <strong class="produto-preco">R$ <%= produto.preco_produto %></strong>
-                <a href="/produto/<%= produto.id_produto %>" class="btn-comprar">Ver produto</a>
+                <strong class="produto-preco" aria-label="Preço: R$ <%= produto.preco_produto %>">
+                  R$ <%= produto.preco_produto %>
+                </strong>
+                <a href="/produto/<%= produto.id_produto %>"
+                   class="btn-comprar"
+                   aria-label="Ver detalhes do produto <%= produto.nome_produto %>">
+                  Ver produto
+                </a>
               </footer>
             </section>
           </article>
@@ -84,7 +97,7 @@
       </section>
     </section>
 
-    <nav class="acoes">
+    <nav class="acoes" aria-label="Ações pós-diagnóstico">
       <a href="/diagnostico" class="btn-voltar">Refazer Diagnóstico</a>
       <a href="/ecoloja" class="btn-home">Ver toda a loja</a>
     </nav>

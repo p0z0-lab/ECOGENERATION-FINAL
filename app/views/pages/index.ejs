@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="keywords" content="energia solar, sustentabilidade, autonomia energética, produtos solares portáteis, diagnóstico energético">
-  <meta name="description" content="EcoGeneration - Descubra sua autonomia energética com nosso diagnóstico gratuito e compre produtos solares portáteis de qualidade.">
   <title>EcoGeneration — Autonomia Energética para Todos</title>
+  <meta name="description" content="Faça seu diagnóstico de autonomia energética e encontre soluções solares portáteis e acessíveis para sua realidade.">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Plataforma de diagnóstico energético e loja de soluções solares portáteis. Descubra sua autonomia e encontre o produto ideal.">
+  <meta name="robots" content="index, follow">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="apple-touch-icon" href="/imagens/favicon2.png">
@@ -15,6 +17,8 @@
   <meta name="theme-color" content="#2e7d32">
 </head>
 <body>
+  <a href="#conteudo-principal" class="skip-link">Ir para o conteúdo principal</a>
+
   <%- include("../partials/header") %>
 
   <!-- ===== HERO CAROUSEL ===== -->
@@ -51,7 +55,7 @@
     <button type="button" class="hero-carousel-button hero-next" aria-label="Próximo">›</button>
   </section>
 
-  <main>
+  <main id="conteudo-principal">
 
     <!-- ===== POR QUE ECOGENERATION ===== -->
     <section class="why-ecogeneration">
@@ -110,27 +114,39 @@
       <h2 id="produtos-destaque">Produtos em Destaque</h2>
       <p class="section-sub">Nossas soluções mais populares</p>
       <section class="produtos-grid-home">
-        <article class="produto-card-home">
-          <figure>
-            <img src="/imagens/carregadoraluzsolar.png" alt="Carregador USB Solar">
-          </figure>
-          <h3>Carregador USB Solar</h3>
-          <a href="/carregador" class="btn-ver">Ver produto</a>
-        </article>
-        <article class="produto-card-home">
-          <figure>
-            <img src="/imagens/luminaria.png" alt="Luminária Solar">
-          </figure>
-          <h3>Luminária Solar</h3>
-          <a href="/luminaria" class="btn-ver">Ver produto</a>
-        </article>
-        <article class="produto-card-home">
-          <figure>
-            <img src="/imagens/ventilador.png" alt="Ventilador Solar">
-          </figure>
-          <h3>Ventilador Solar</h3>
-          <a href="/ventilador" class="btn-ver">Ver produto</a>
-        </article>
+        <% if (produtosDestaque && produtosDestaque.length > 0) { %>
+          <% produtosDestaque.forEach(function(produto) { %>
+            <article class="produto-card-home">
+              <figure>
+                <img src="/imagens/<%= produto.imagem_produto %>" alt="<%= produto.nome_produto %>">
+              </figure>
+              <h3><%= produto.nome_produto %></h3>
+              <a href="/produto/<%= produto.id_produto %>" class="btn-ver">Ver produto</a>
+            </article>
+          <% }); %>
+        <% } else { %>
+          <article class="produto-card-home">
+            <figure>
+              <img src="/imagens/ventilador.png" alt="Ventilador Solar">
+            </figure>
+            <h3>Ventilador Solar</h3>
+            <a href="/ventilador" class="btn-ver">Ver produto</a>
+          </article>
+          <article class="produto-card-home">
+            <figure>
+              <img src="/imagens/powerbankportatil.png" alt="Powerbank Portátil">
+            </figure>
+            <h3>Powerbank Portátil</h3>
+            <a href="/powerbank" class="btn-ver">Ver produto</a>
+          </article>
+          <article class="produto-card-home">
+            <figure>
+              <img src="/imagens/luminariasolar.png" alt="Lâmpada Solar">
+            </figure>
+            <h3>Lâmpada Solar</h3>
+            <a href="/lampadasolar" class="btn-ver">Ver produto</a>
+          </article>
+        <% } %>
       </section>
       <a href="/ecoloja" class="btn-cta btn-cta-outline">Ver todos os produtos</a>
     </section>
@@ -145,31 +161,6 @@
   </main>
 
   <%- include("../partials/footer") %>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const slidesContainer = document.querySelector('.hero-slides');
-      const slides = document.querySelectorAll('.hero-slide');
-      const prevButton = document.querySelector('.hero-prev');
-      const nextButton = document.querySelector('.hero-next');
-      let currentIndex = 0;
-      const updateCarousel = () => {
-        slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
-      };
-      prevButton.addEventListener('click', () => {
-        currentIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
-        updateCarousel();
-      });
-      nextButton.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        updateCarousel();
-      });
-      // Auto-play
-      setInterval(() => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        updateCarousel();
-      }, 5000);
-    });
-  </script>
+  <script src="/js/index.js"></script>
 </body>
 </html>

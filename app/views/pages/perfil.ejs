@@ -3,9 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="keywords" content="perfil, minha conta, histórico de compras, diagnósticos, energia solar">
-  <meta name="description" content="Gerencie seu perfil na EcoGeneration, veja seu histórico de diagnósticos e compras.">
   <title>Meu Perfil — EcoGeneration</title>
+  <meta name="description" content="Gerencie seu perfil, veja diagnósticos e histórico de compras.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="description" content="Gerencie seu perfil, veja histórico de diagnósticos e compras na EcoGeneration.">
+  <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="/css/header.css">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/perfil.css">
@@ -34,9 +36,11 @@
   <meta name="theme-color" content="#2e7d32">
 </head>
 <body>
+  <a href="#conteudo-principal" class="skip-link">Ir para o conteúdo principal</a>
+
   <%- include('../partials/header') %>
 
-  <main class="perfil-container">
+  <main id="conteudo-principal" class="perfil-container">
 
     <header class="perfil-header">
       <figure class="perfil-avatar">
@@ -129,21 +133,6 @@
   </main>
 
   <%- include('../partials/footer') %>
-
-  <script>
-    const btnExcluir = document.getElementById('btn-excluir-conta');
-    const modal = document.getElementById('modal-excluir');
-    const btnCancelar = document.getElementById('btn-cancelar-excluir');
-
-    btnExcluir.addEventListener('click', () => {
-      modal.style.display = 'flex';
-      modal.setAttribute('aria-hidden', 'false');
-    });
-
-    btnCancelar.addEventListener('click', () => {
-      modal.style.display = 'none';
-      modal.setAttribute('aria-hidden', 'true');
-    });
-  </script>
+  <script src="/js/perfil.js"></script>
 </body>
 </html>

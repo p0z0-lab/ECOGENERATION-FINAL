@@ -16,12 +16,19 @@ main {
   margin: 2rem auto;
   background-color: #fff; /* Fundo branco para o formulário */
   border-radius: 8px;
- 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
   margin-bottom: 2rem !important; /* margem suavizada */
+  color: #154d27; /* verde escuro para o título */
+}
+
+#cadastro-form + h1,
+main h1,
+h1.ui.header {
+  color: #154d27;
 }
 
 
@@ -166,25 +173,86 @@ h1 {
 /* ── DARK MODE ──────────────────────────────────────────── */
 [data-theme="dark"] body {
   background: #121212;
-  
+  color: #e0e0e0;
 }
 
+[data-theme="dark"] main {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
 
+html[data-theme="dark"] h1 {
+  color: #e0e0e0 !important;
+}
 
+[data-theme="dark"] #cadastro-form label {
+  color: #e0e0e0;
+}
+
+[data-theme="dark"] #cadastro-form input,
+[data-theme="dark"] #cadastro-form textarea {
+  background: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #444;
+}
+
+[data-theme="dark"] #cadastro-form input:focus,
+[data-theme="dark"] #cadastro-form textarea:focus {
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.2);
+}
+
+[data-theme="dark"] #cadastro-form input[aria-invalid="true"] {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 1px rgba(255, 107, 107, 0.3);
+}
+
+[data-theme="dark"] #cadastro-form input::placeholder,
+[data-theme="dark"] #cadastro-form textarea::placeholder {
+  color: #888;
+}
 
 [data-theme="dark"] .ui.input input,
 [data-theme="dark"] .ui.input textarea {
-  background: #1e1e1e;
-
-  
+  background: #2a2a2a;
+  color: #e0e0e0;
   border-color: #444;
 }
 
 [data-theme="dark"] .ui.button {
-  background: #2e7d32;
-
+  background: #2e7d32 !important;
+  color: #fff !important;
 }
 
 [data-theme="dark"] .ui.button:hover {
-  background: #1b5e20;
+  background: #1b5e20 !important;
 }
+
+[data-theme="dark"] .ui.primary.button {
+  background: #2e7d32 !important;
+  color: #fff !important;
+}
+
+[data-theme="dark"] .ui.primary.button:hover {
+  background: #1b5e20 !important;
+}
+
+[data-theme="dark"] .ui.pointing.red.basic.label {
+  background: transparent !important;
+  color: #ff6b6b !important;
+}
+
+[data-theme="dark"] .campo-dica {
+  color: #aaa;
+}
+
+[data-theme="dark"] .campo-erro {
+  color: #ff6b6b !important;
+}
+
+[data-theme="dark"] .erro-geral {
+  background-color: rgba(255, 107, 107, 0.1) !important;
+  border-color: #ff6b6b !important;
+  color: #ff6b6b !important;
+}
+
